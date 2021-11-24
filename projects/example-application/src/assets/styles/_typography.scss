@@ -1,0 +1,164 @@
+@import 'variables';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 1.44em 0 0.5em;
+}
+
+h1 {
+  font-size: 2.074em;
+}
+
+h2 {
+  font-size: 1.728em;
+}
+
+h3 {
+  font-size: 1.44em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.833em;
+}
+
+p {
+  font-size: 1em;
+  margin: 0 0 1.5em;
+}
+
+a {
+  color: $blue-darken-2;
+  transition: all 250ms;
+
+  &:hover {
+    color: $blue-lighten-1;
+    text-decoration: none;
+  }
+}
+
+.text {
+  &-red {
+    color: $red;
+  }
+
+  &-gray {
+    color: $gray;
+  }
+
+  &-darker {
+    color: $gray-darken-2;
+  }
+
+  &-green {
+    color: $green;
+  }
+
+  &-orange {
+    color: $orange;
+  }
+
+  &-white {
+    color: $white;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // text font-size
+  &-xs {
+    font-size: 0.75rem;
+  }
+
+  &-sm {
+    font-size: 0.875rem;
+  }
+
+  &-base {
+    font-size: 1rem;
+  }
+
+  &-lg {
+    font-size: 1.125rem;
+  }
+
+  &-xl {
+    font-size: 1.25rem;
+  }
+
+  &-2xl {
+    font-size: 1.5rem;
+  }
+
+  &-3xl {
+    font-size: 1.875rem;
+  }
+
+  &-4xl {
+    font-size: 2.25rem;
+  }
+
+  &-5xl {
+    font-size: 3rem;
+  }
+
+  &-6xl {
+    font-size: 4rem;
+  }
+}
+
+.fw {
+  &-bold {
+    // Equivalent of 700
+    font-weight: bold;
+  }
+
+  &-normal {
+    // Equivalent of 400
+    font-weight: normal;
+  }
+
+  &-900 {
+    font-weight: 900;
+  }
+
+  &-600 {
+    font-weight: 600;
+  }
+
+  &-500 {
+    font-weight: 500;
+  }
+
+  &-400 {
+    font-weight: 400;
+  }
+
+  &-300 {
+    font-weight: 300;
+  }
+
+  &-200 {
+    font-weight: 200;
+  }
+
+  &-100 {
+    font-weight: 100;
+  }
+}

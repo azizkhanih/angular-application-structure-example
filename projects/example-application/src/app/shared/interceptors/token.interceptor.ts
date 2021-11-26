@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/example-application/src/environments/environment';
 import { Observable } from 'rxjs';
-import { AccountService } from '../../account/services/account.service';
+import { AccountService } from '../../account/shared/services';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor

@@ -8,7 +8,6 @@ h5,
 h6 {
   font-weight: bold;
   line-height: 1.4;
-  margin: 1.44em 0 0.5em;
 }
 
 h1 {
@@ -160,5 +159,11 @@ a {
 
   &-100 {
     font-weight: 100;
+  }
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
   }
 }

@@ -1,0 +1,46 @@
+{
+    "EXAMPLE_APPLICATION": {
+        "APP_NAME": "Workspace Example"
+    },
+    "COMMON": {
+        "SEARCH": "Search",
+        "OPEN": "Open",
+        "NEW": "New",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "SAVE": "Save",
+        "VIEW": "View",
+        "CANCEL": "Cancel",
+        "UPDATE": "Update",
+        "CREATE": "Create",
+        "CLOSE": "Close",
+        "ARE_YOU_SURE": "Are you sure",
+        "YES": "Yes",
+        "NO": "No"
+    },
+    "MESSAGE": {
+        "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful",
+        "THE_ITEM_DELETED_SUCCESSFULLY": "The item deleted successfully",
+        "PLEASE_LOG_IN": "Please signIn",
+        "SUCCESSFUL_SIGN_IN": "Successful signIn",
+        "FIELD_IS_REQUIRED": "Field is required",
+        "PASSWORD_IS_REQUIRED": "Password is required",
+        "CONFIRM_PASSWORD_IS_REQUIRED": "Confirm password is required",
+        "PASSWORDS_NOT_MATCH": "Passwords must match",
+        "EMAIL_FORMAT_IS_INVALID": "Email format is invalid"
+    },
+    "ACCOUNT": {
+        "FIRST_NAME": "First Name",
+        "LAST_NAME": "Last Name",
+        "SIGN_IN": "Sign in",
+        "LOGOUT": "Logout",
+        "SIGN_UP": "Sign up",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Confirm Password"
+    },
+    "HOME": {
+        "ROUTE_WITH_GUARD": "Route With Guard",
+        "ROUTE_WITHOUT_GUARD": "Route Without Guard"
+    }
+}

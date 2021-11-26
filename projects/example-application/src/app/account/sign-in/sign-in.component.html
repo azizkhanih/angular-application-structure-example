@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center py-3">
+        <div>
+          <div class="text-xl fw-bold">{{ 'ACCOUNT.SIGN_IN' | translate }}</div>
+        </div>
+        <div class="cursor-pointer">
+          <mat-icon [routerLink]="['/home']">home</mat-icon>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="email">{{ 'ACCOUNT.EMAIL' | translate }}</label>
+            <input type="text" formControlName="email" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && form['email'].errors }" />
+            <div *ngIf="submitted && form['email'].errors" class="invalid-feedback">
+              <div *ngIf="form['email'].errors['required']">
+                {{ 'MESSAGE.FIELD_IS_REQUIRED' | translate }}
+              </div>
+              <div *ngIf="form['email'].errors['email']">
+                {{ 'MESSAGE.EMAIL_FORMAT_IS_INVALID' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="password">{{ 'ACCOUNT.PASSWORD' | translate }}</label>
+            <input type="password" formControlName="password" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && form['password'].errors }" />
+            <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
+              <div *ngIf="form['password'].errors['required']">{{ 'MESSAGE.PASSWORD_IS_REQUIRED' | translate }}</div>
+            </div>
+          </div>
+
+          <div class="mt-3 d-flex justify-content-between">
+            <button type="submit" [disabled]="isLoading" mat-flat-button color="primary">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{ 'ACCOUNT.SIGN_IN' | translate }}
+            </button>
+
+            <button type="button" mat-button [routerLink]="['/account/signup']">
+              <mat-icon>person_add</mat-icon>
+              {{ 'ACCOUNT.SIGN_UP' | translate }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

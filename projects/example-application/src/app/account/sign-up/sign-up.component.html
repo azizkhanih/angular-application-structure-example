@@ -18,7 +18,7 @@
               [ngClass]="{ 'is-invalid': submitted && form['firstName'].errors }" />
             <div *ngIf="submitted && form['firstName'].errors" class="invalid-feedback">
               <div *ngIf="form['firstName'].errors['required']">
-                {{ 'MESSAGE.FIELD_IS_REQUIRED' | translate }}
+                {{ 'VALIDATION.FIELD_IS_REQUIRED' | translate }}
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@
               [ngClass]="{ 'is-invalid': submitted && form['lastName'].errors }" />
             <div *ngIf="submitted && form['lastName'].errors" class="invalid-feedback">
               <div *ngIf="form['lastName'].errors['required']">
-                {{ 'MESSAGE.FIELD_IS_REQUIRED' | translate }}
+                {{ 'VALIDATION.FIELD_IS_REQUIRED' | translate }}
               </div>
             </div>
           </div>
@@ -40,10 +40,10 @@
               [ngClass]="{ 'is-invalid': submitted && form['email'].errors }" />
             <div *ngIf="submitted && form['email'].errors" class="invalid-feedback">
               <div *ngIf="form['email'].errors['required']">
-                {{ 'MESSAGE.FIELD_IS_REQUIRED' | translate }}
+                {{ 'VALIDATION.FIELD_IS_REQUIRED' | translate }}
               </div>
               <div *ngIf="form['email'].errors['email']">
-                {{ 'MESSAGE.EMAIL_FORMAT_IS_INVALID' | translate }}
+                {{ 'VALIDATION.EMAIL_FORMAT_IS_INVALID' | translate }}
               </div>
             </div>
           </div>
@@ -53,7 +53,18 @@
             <input type="password" formControlName="password" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && form['password'].errors }" />
             <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
-              <div *ngIf="form['password'].errors['required']">{{ 'MESSAGE.PASSWORD_IS_REQUIRED' | translate }}</div>
+              <div *ngIf="form['password'].errors['required']">
+                {{ 'VALIDATION.PASSWORD_IS_REQUIRED' | translate }}
+              </div>
+              <div *ngIf="form['password'].errors['minlength']">
+                {{ 'VALIDATION.MIN_LENGTH_IS' | translate: { param1: 8 } }}
+              </div>
+              <div *ngIf="form['password'].errors['passwordStrength']">
+                {{ 'VALIDATION.PASSWORD_SHOULD_CONTAIN_LOWER_AND_UPPERCASE_LETTERS' | translate }}
+              </div>
+              <div *ngIf="form['password'].errors['notContainFirstNameOrLastName']">
+                {{ 'VALIDATION.PASSWORD_SHOULD_NOT_CONTAIN_FIRST_NAME_OR_LAST_NAME' | translate }}
+              </div>
             </div>
           </div>
 
@@ -62,12 +73,11 @@
             <input type="password" formControlName="passwordConfirmation" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && form['passwordConfirmation'].errors }" />
             <div *ngIf="submitted && form['passwordConfirmation'].errors" class="invalid-feedback">
-              <div *ngIf="form['passwordConfirmation'].errors['required']">{{ 'MESSAGE.CONFIRM_PASSWORD_IS_REQUIRED' |
-                translate
-                }}
+              <div *ngIf="form['passwordConfirmation'].errors['required']">
+                {{ 'VALIDATION.CONFIRM_PASSWORD_IS_REQUIRED' | translate }}
               </div>
-              <div *ngIf="form['passwordConfirmation'].errors['mustMatch']">{{ 'MESSAGE.PASSWORDS_NOT_MATCH' | translate
-                }}
+              <div *ngIf="form['passwordConfirmation'].errors['mustMatch']">
+                {{ 'VALIDATION.PASSWORDS_NOT_MATCH' | translate }}
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
+import { EmailValidator } from '../../shared/validators/email.validator';
 import { Account } from '../shared/models';
 import { AccountService } from '../shared/services';
 import { SignInRequest } from './../shared/models/sign-in.model';
@@ -43,7 +44,7 @@ export class SignInComponent implements OnInit
   ngOnInit(): void
   {
     this.signInForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, EmailValidator()]],
       password: ['', Validators.required]
     });
 

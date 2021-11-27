@@ -3,7 +3,10 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
-import { MustMatch } from '../../shared/helpers/validators/must-match.validator';
+import { EmailValidator } from '../../shared/validators/email.validator';
+import { MustMatchValidator } from '../../shared/validators/must-match.validator';
+import { NotContainFirstNameOrLastNameValidator } from '../shared/validators/not-containt-firstname-or-lastname.validator';
+import { PasswordStrengthValidator } from '../shared/validators/password-strength.validator';
 import { SignUpRequest } from './../shared/models/sign-up.model';
 import { AccountService } from './../shared/services/account.service';
 
@@ -41,11 +44,14 @@ export class SignUpComponent implements OnInit
     this.signUpForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      passwordConfirmation: ['', Validators.required],
+      email: ['', [Validators.required, EmailValidator()]],
+      password: ['', [Validators.required, Validators.minLength(8), PasswordStrengthValidator()]],
+      passwordConfirmation: ['', [Validators.required]],
     }, {
-      validator: MustMatch('password', 'passwordConfirmation')
+      validators: [
+        MustMatchValidator('password', 'passwordConfirmation'),
+        NotContainFirstNameOrLastNameValidator('password', 'firstName', 'lastName')
+      ]
     });
 
     // get return url from route parameters or default to '/'

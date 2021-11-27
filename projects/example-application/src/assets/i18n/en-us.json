@@ -18,17 +18,22 @@
         "YES": "Yes",
         "NO": "No"
     },
+    "VALIDATION": {
+        "FIELD_IS_REQUIRED": "Field is required",
+        "PASSWORD_IS_REQUIRED": "Password is required",
+        "CONFIRM_PASSWORD_IS_REQUIRED": "Confirm password is required",
+        "PASSWORDS_NOT_MATCH": "Passwords must match",
+        "EMAIL_FORMAT_IS_INVALID": "Email format is invalid",
+        "MIN_LENGTH_IS": "Min length is {{param1}} characters",
+        "PASSWORD_SHOULD_CONTAIN_LOWER_AND_UPPERCASE_LETTERS": "Should contain lower and uppercase letters",
+        "PASSWORD_SHOULD_NOT_CONTAIN_FIRST_NAME_OR_LAST_NAME": "Should not contain first name or last name"
+    },
     "MESSAGE": {
         "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful",
         "THE_ITEM_DELETED_SUCCESSFULLY": "The item deleted successfully",
         "THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL": "The sign up operation was successful",
         "PLEASE_LOG_IN": "Please sign in",
         "SUCCESSFUL_SIGN_IN": "Successful sign in",
-        "FIELD_IS_REQUIRED": "Field is required",
-        "PASSWORD_IS_REQUIRED": "Password is required",
-        "CONFIRM_PASSWORD_IS_REQUIRED": "Confirm password is required",
-        "PASSWORDS_NOT_MATCH": "Passwords must match",
-        "EMAIL_FORMAT_IS_INVALID": "Email format is invalid",
         "THE_SERVICE_NOT_IMPLEMENTED": "The service not implemented"
     },
     "ACCOUNT": {

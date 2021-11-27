@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-export function MustMatch(controlName: string, matchingControlName: string)
+export function MustMatchValidator(controlName: string, matchingControlName: string)
 {
     return (formGroup: FormGroup) =>
     {

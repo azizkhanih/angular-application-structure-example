@@ -21,13 +21,15 @@
     "MESSAGE": {
         "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful",
         "THE_ITEM_DELETED_SUCCESSFULLY": "The item deleted successfully",
-        "PLEASE_LOG_IN": "Please signIn",
-        "SUCCESSFUL_SIGN_IN": "Successful signIn",
+        "THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL": "The sign up operation was successful",
+        "PLEASE_LOG_IN": "Please sign in",
+        "SUCCESSFUL_SIGN_IN": "Successful sign in",
         "FIELD_IS_REQUIRED": "Field is required",
         "PASSWORD_IS_REQUIRED": "Password is required",
         "CONFIRM_PASSWORD_IS_REQUIRED": "Confirm password is required",
         "PASSWORDS_NOT_MATCH": "Passwords must match",
-        "EMAIL_FORMAT_IS_INVALID": "Email format is invalid"
+        "EMAIL_FORMAT_IS_INVALID": "Email format is invalid",
+        "THE_SERVICE_NOT_IMPLEMENTED": "The service not implemented"
     },
     "ACCOUNT": {
         "FIRST_NAME": "First Name",

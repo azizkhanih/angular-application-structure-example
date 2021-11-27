@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SnackBarService } from 'projects/tools/src/public-api';
 import { MustMatch } from '../../shared/helpers/validators/must-match.validator';
 import { SignUpRequest } from './../shared/models/sign-up.model';
 import { AccountService } from './../shared/services/account.service';
@@ -9,6 +11,7 @@ import { AccountService } from './../shared/services/account.service';
   selector: 'account-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUpComponent implements OnInit
 {
@@ -26,7 +29,10 @@ export class SignUpComponent implements OnInit
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private accountService: AccountService
+    private changeDetectorRef: ChangeDetectorRef,
+    private accountService: AccountService,
+    private translateService: TranslateService,
+    private snackBarService: SnackBarService
   )
   { }
 
@@ -63,6 +69,7 @@ export class SignUpComponent implements OnInit
     }
 
     this.isLoading = true;
+    this.changeDetectorRef.detectChanges();
 
     const user = {
       firstName: this.form['firstName'].value,
@@ -74,12 +81,17 @@ export class SignUpComponent implements OnInit
     this.accountService.signUp(user).subscribe({
       next: () =>
       {
-        // this.toastService.showSuccess(this.translateService.instant("MESSAGE.PLEASE_LOG_IN"));
+        this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL"));
+
+        this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
+
         this.router.navigate(['/account/signin']);
       },
-      error: error =>
+      error: () =>
       {
         this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
       }
     });
   }

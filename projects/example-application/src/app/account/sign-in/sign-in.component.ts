@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SnackBarService } from 'projects/tools/src/public-api';
 import { Account } from '../shared/models';
 import { AccountService } from '../shared/services';
 import { SignInRequest } from './../shared/models/sign-in.model';
@@ -9,6 +11,7 @@ import { SignInRequest } from './../shared/models/sign-in.model';
   selector: 'account-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInComponent implements OnInit
 {
@@ -24,7 +27,10 @@ export class SignInComponent implements OnInit
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef,
     private accountService: AccountService,
+    private translateService: TranslateService,
+    private snackBarService: SnackBarService
   )
   {
     // redirect to main route if already logged in
@@ -62,11 +68,21 @@ export class SignInComponent implements OnInit
     }
 
     this.isLoading = true;
+    this.changeDetectorRef.detectChanges();
 
     const signInRequest = {
       email: this.form['email'].value,
       password: this.form['password'].value,
     } as SignInRequest;
+
+    //TODO: this is temp, we need to implement sign in service 
+    setTimeout(() =>
+    {
+      this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SERVICE_NOT_IMPLEMENTED"));
+      this.isLoading = false;
+      this.changeDetectorRef.detectChanges();
+    }, 2000);
+    return;
 
     this.accountService.signIn(signInRequest).subscribe({
       next: (response) =>
@@ -79,13 +95,14 @@ export class SignInComponent implements OnInit
 
         this.accountService.setAccount(account);
 
-        // this.toastService.showSuccess(this.translateService.instant("MESSAGE.SUCCESSFUL_SIGN_IN"));
+        this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.SUCCESSFUL_SIGN_IN"));
 
         this.router.navigate([this.returnUrl]);
       },
       error: () =>
       {
         this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
       }
     });
   }

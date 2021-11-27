@@ -1,0 +1,11 @@
+<div *ngIf="show">
+  <div class="backdrop" [ngClass]="{ 'full-screen': config?.fullScreenBackdrop == true }"
+    [ngStyle]="{ 'border-radius': config?.backdropBorderRadius, 'background-color': config?.backdropBackgroundColour }">
+  </div>
+  <div class="spinner-circle" [ngClass]="{ 'full-screen': config?.fullScreenBackdrop == true }" [ngStyle]="{
+        'border-top-color': config?.secondaryColour,
+        'border-right-color': config?.secondaryColour,
+        'border-bottom-color': config?.secondaryColour,
+        'border-left-color': config?.primaryColour
+      }"></div>
+</div>

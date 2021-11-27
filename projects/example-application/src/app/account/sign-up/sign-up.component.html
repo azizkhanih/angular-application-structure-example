@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
-  <div class="col-12 col-md-6 col-lg-4">
+  <div class="col-12 col-md-6 col-lg-3">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center py-3">
         <div>
@@ -9,7 +9,7 @@
           <mat-icon [routerLink]="['/home']">home</mat-icon>
         </div>
       </div>
-      <div class="card-body sign-out-container">
+      <div class="sign-out-container card-body">
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
           <div class="form-group">
@@ -36,7 +36,7 @@
 
           <div class="form-group mt-3">
             <label for="email">{{ 'ACCOUNT.EMAIL' | translate }}</label>
-            <input type="text" formControlName="email" class="form-control"
+            <input type="email" formControlName="email" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && form['email'].errors }" />
             <div *ngIf="submitted && form['email'].errors" class="invalid-feedback">
               <div *ngIf="form['email'].errors['required']">
@@ -83,7 +83,11 @@
               {{ 'ACCOUNT.SIGN_IN' | translate }}
             </button>
           </div>
+
         </form>
+
+        <tools-loading [show]="isLoading"></tools-loading>
+
       </div>
     </div>
   </div>

@@ -1,0 +1,15 @@
+<div class="mat-simple-snackbar d-flex justify-content-between">
+  <div class="align-self-center">{{ data.message }}</div>
+  <div class="mat-simple-snackbar-action">
+    <div *ngIf="data.action" class="align-self-center">
+      <button mat-button color="primary" (click)="snackBarRef.dismissWithAction()">
+        {{ data.action }}
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button (click)="snackBarRef.dismiss()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

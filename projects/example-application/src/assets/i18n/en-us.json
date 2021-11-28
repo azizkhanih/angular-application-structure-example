@@ -46,6 +46,9 @@
         "PASSWORD": "Password",
         "CONFIRM_PASSWORD": "Confirm Password"
     },
+    "HEADER": {
+        "SIGN_IN": "Sign in"
+    },
     "HOME": {
         "ROUTE_WITH_GUARD": "Route With Guard",
         "ROUTE_WITHOUT_GUARD": "Route Without Guard"

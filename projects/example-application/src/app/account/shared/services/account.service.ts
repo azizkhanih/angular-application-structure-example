@@ -45,14 +45,14 @@ export class AccountService
     this.router.navigate(['/account/signin']);
   }
 
-  signIn(createSession: SignInRequest): Observable<SignInResponse>
+  signIn(signInRequest: SignInRequest): Observable<SignInResponse>
   {
-    return this.accountHttpService.signIn(createSession);
+    return this.accountHttpService.signIn(signInRequest);
   }
 
-  signUp(user: SignUpRequest): Observable<SignUpResponse>
+  signUp(signUpRequest: SignUpRequest): Observable<SignUpResponse>
   {
-    return this.accountHttpService.signUp(user);
+    return this.accountHttpService.signUp(signUpRequest);
   }
 
   ngOnDestroy(): void

@@ -11,13 +11,13 @@ export class AccountHttpService
 
   private apiUrl = environment.apiUrl;
 
-  signUp(signUp: SignUpRequest): Observable<SignUpResponse>
+  signUp(signUpRequest: SignUpRequest): Observable<SignUpResponse>
   {
-    return this.http.post<SignUpResponse>(`${ this.apiUrl }/users`, signUp);
+    return this.http.post<SignUpResponse>(`${ this.apiUrl }/users`, signUpRequest);
   }
 
-  signIn(signIn: SignInRequest): Observable<SignInResponse>
+  signIn(signInRequest: SignInRequest): Observable<SignInResponse>
   {
-    return this.http.post<SignInResponse>(`${ this.apiUrl }/signin`, signIn);
+    return this.http.post<SignInResponse>(`${ this.apiUrl }/signin`, signInRequest);
   }
 }

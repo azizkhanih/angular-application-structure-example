@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
+import { takeUntil } from 'rxjs/operators';
+import { UnsubscribeOnDestroy } from '../../core/UnsubscribeOnDestroy';
 import { EmailValidator } from '../../shared/validators/email.validator';
 import { Account } from '../shared/models';
 import { AccountService } from '../shared/services';
@@ -14,7 +16,7 @@ import { SignInRequest } from './../shared/models/sign-in.model';
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignInComponent implements OnInit
+export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy
 {
   signInForm: FormGroup = new FormGroup({
     email: new FormControl(''),
@@ -34,6 +36,8 @@ export class SignInComponent implements OnInit
     private snackBarService: SnackBarService
   )
   {
+    super();
+
     // redirect to main route if already logged in
     if (this.accountService.accountValue?.accessToken)
     {
@@ -71,12 +75,12 @@ export class SignInComponent implements OnInit
     this.isLoading = true;
     this.changeDetectorRef.detectChanges();
 
-    const signInRequest = {
-      email: this.form['email'].value,
-      password: this.form['password'].value,
-    } as SignInRequest;
+    const signInRequest = new SignInRequest(
+      this.form['email'].value,
+      this.form['password'].value
+    );
 
-    //TODO: this is temp, we need to implement sign in service 
+    // TODO: this is temp, we need to implement sign in service 
     setTimeout(() =>
     {
       this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SERVICE_NOT_IMPLEMENTED"));
@@ -85,26 +89,31 @@ export class SignInComponent implements OnInit
     }, 2000);
     return;
 
-    this.accountService.signIn(signInRequest).subscribe({
-      next: (response) =>
-      {
-        const account = {
-          email: signInRequest.email,
-          accessToken: response.accessToken,
-          refreshToken: response.refreshToken
-        } as Account;
+    // TODO: we need to implement sign in service 
+    this.accountService.signIn(signInRequest)
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe({
+        next: (response) =>
+        {
+          const account = {
+            email: signInRequest.email,
+            accessToken: response.accessToken,
+            refreshToken: response.refreshToken
+          } as Account;
 
-        this.accountService.setAccount(account);
+          this.accountService.setAccount(account);
 
-        this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.SUCCESSFUL_SIGN_IN"));
+          this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.SUCCESSFUL_SIGN_IN"));
 
-        this.router.navigate([this.returnUrl]);
-      },
-      error: () =>
-      {
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
-      }
-    });
+          this.router.navigate([this.returnUrl]);
+        },
+        error: () =>
+        {
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
+        }
+      });
   }
 }

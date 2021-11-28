@@ -5,17 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { LoadingModule, SnackBarModule } from 'projects/tools/src/public-api';
-import { SharedModule } from '../shared/shared.module';
-import { AccountRoutingModule } from './account-routing.module';
-import { SignInModule } from './sign-in/sign-in.module';
-import { SignUpModule } from './sign-up/sign-up.module';
+import { SharedModule } from '../../shared/shared.module';
+import { SignUpComponent } from './sign-up.component';
 
 const BASE_MODULES = [CommonModule, RouterModule, ReactiveFormsModule];
 const APP_MODULES = [SharedModule];
 const TOOLS_MODULES = [SnackBarModule, LoadingModule];
+const COMPONENTS = [SignUpComponent];
 const MATERIAL_MODULES = [MatIconModule, MatButtonModule];
-const ACCOUNT_MODULES = [AccountRoutingModule, SignInModule, SignUpModule];
-const COMPONENTS: [] = [];
 
 @NgModule({
   declarations: [...COMPONENTS],
@@ -23,8 +20,7 @@ const COMPONENTS: [] = [];
     ...BASE_MODULES,
     ...APP_MODULES,
     ...MATERIAL_MODULES,
-    ...TOOLS_MODULES,
-    ...ACCOUNT_MODULES],
+    ...TOOLS_MODULES],
   exports: [
     ...COMPONENTS,
     ...APP_MODULES,
@@ -32,4 +28,4 @@ const COMPONENTS: [] = [];
     ...TOOLS_MODULES
   ]
 })
-export class AccountModule { }
+export class SignUpModule { }

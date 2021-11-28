@@ -13,8 +13,11 @@ export function NotContainFirstNameOrLastNameValidator(controlName: string, firs
             return;
         }
 
-        const controlValue = String(control.value);
-        if (controlValue && (controlValue.includes(firstNameControl.value) || controlValue.includes(lastNameControl.value)) &&
+        const controlValue = String(control.value).toLowerCase();
+        const firstNameControlValue = String(firstNameControl.value).toLowerCase();
+        const lastNameControlValue = String(lastNameControl.value).toLowerCase();
+
+        if (controlValue && (controlValue.includes(firstNameControlValue) || controlValue.includes(lastNameControlValue)) &&
             firstNameControl.value && lastNameControl.value)
         {
             control.setErrors({ notContainFirstNameOrLastName: true });

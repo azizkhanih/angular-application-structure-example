@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AccountService } from '../../../account/shared/services';
 
 @Component({
   selector: 'layout-header',
@@ -9,7 +8,7 @@ import { AccountService } from '../../../account/shared/services';
 })
 export class HeaderComponent implements OnInit
 {
-  constructor(private accountService: AccountService) { }
+  constructor() { }
 
   ngOnInit(): void
   {

@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SnackBarComponent } from './snack-bar.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SnackBarService
+export class SnackBarService implements OnDestroy
 {
+  private onDestroy$ = new Subject<void>();
+
   defaultDurationInSeconds = 5;
   defaultHorizontalPosition: MatSnackBarHorizontalPosition = 'left';
   defaultVerticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -33,8 +37,12 @@ export class SnackBarService
 
     if (onAction && this._snackBar != null)
     {
-      //TODO: fix object null possible
-      //this._snackBar._openedSnackBarRef.onAction().subscribe(onAction);
+      if (this._snackBar?._openedSnackBarRef)
+      {
+        this._snackBar._openedSnackBarRef.onAction()
+          .pipe(takeUntil(this.onDestroy$))
+          .subscribe(onAction);
+      }
     }
   }
 
@@ -72,5 +80,11 @@ export class SnackBarService
   )
   {
     this.show(message, 'warn', action, onAction, horizontalPosition, verticalPosition, durationInSeconds);
+  }
+
+  ngOnDestroy(): void
+  {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

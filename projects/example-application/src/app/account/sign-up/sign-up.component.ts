@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
+import { takeUntil } from 'rxjs/operators';
+import { UnsubscribeOnDestroy } from '../../core/UnsubscribeOnDestroy';
 import { EmailValidator } from '../../shared/validators/email.validator';
 import { MustMatchValidator } from '../../shared/validators/must-match.validator';
 import { NotContainFirstNameOrLastNameValidator } from '../shared/validators/not-containt-firstname-or-lastname.validator';
@@ -16,7 +18,7 @@ import { AccountService } from './../shared/services/account.service';
   styleUrls: ['./sign-up.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignUpComponent implements OnInit
+export class SignUpComponent extends UnsubscribeOnDestroy implements OnInit, OnDestroy
 {
   signUpForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
@@ -37,7 +39,9 @@ export class SignUpComponent implements OnInit
     private translateService: TranslateService,
     private snackBarService: SnackBarService
   )
-  { }
+  {
+    super();
+  }
 
   ngOnInit()
   {
@@ -77,28 +81,32 @@ export class SignUpComponent implements OnInit
     this.isLoading = true;
     this.changeDetectorRef.detectChanges();
 
-    const user = {
-      firstName: this.form['firstName'].value,
-      lastName: this.form['lastName'].value,
-      email: this.form['email'].value,
-      password: this.form['password'].value
-    } as SignUpRequest;
+    const signUpRequest = new SignUpRequest(
+      this.form['firstName'].value,
+      this.form['lastName'].value,
+      this.form['email'].value,
+      this.form['password'].value
+    );
 
-    this.accountService.signUp(user).subscribe({
-      next: () =>
-      {
-        this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL"));
+    this.accountService.signUp(signUpRequest)
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe({
+        next: () =>
+        {
+          this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL"));
 
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
 
-        this.router.navigate(['/account/signin']);
-      },
-      error: () =>
-      {
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
-      }
-    });
+          this.router.navigate(['/account/signin']);
+        },
+        error: () =>
+        {
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
+        }
+      });
   }
 }

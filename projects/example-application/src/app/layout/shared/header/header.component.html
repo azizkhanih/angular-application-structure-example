@@ -1,5 +1,10 @@
 <div class="d-flex justify-content-between">
     <mat-toolbar color="primary">
+        <div class="cursor-pointer px-2" [routerLink]="['/home']" routerLinkActive="router-link-active">{{ 'HOME.HOME' |
+            translate }}</div>
+        <div class="cursor-pointer px-2" [routerLink]="['/dynamicexample']" routerLinkActive="router-link-active">{{
+            'DYNAMIC_FORM.DYNAMIC_FORM' | translate }}</div>
+
         <span class="header-spacer"></span>
 
         <button mat-button [routerLink]="['/account/signin']" routerLinkActive="router-link-active">

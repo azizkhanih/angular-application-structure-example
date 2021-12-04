@@ -1,0 +1,20 @@
+<div [formGroup]="form" [hidden]="dynamicField.hidden === 'true'">
+    <div class="form-group mt-3">
+        <label [attr.for]="dynamicField.field">{{dynamicField.label}}</label>
+
+        <ng-container [ngSwitch]="dynamicField.controlType">
+
+            <input *ngSwitchCase="dynamicFieldType.InputText" type="text" class="form-control" [id]="dynamicField.field"
+                [formControlName]="dynamicField.field" [value]="dynamicField.value">
+
+            <input *ngSwitchCase="dynamicFieldType.InputCheckBox" type="checkbox" class="form-check"
+                [id]="dynamicField.field" [formControlName]="dynamicField.field" [value]="dynamicField.value">
+
+            <select *ngSwitchCase="dynamicFieldType.Select" class="form-control" [id]="dynamicField.field"
+                [formControlName]="dynamicField.field">
+                <option *ngFor="let opt of dynamicField.options" [value]="opt.field">{{opt.value}}</option>
+            </select>
+        </ng-container>
+    </div>
+    <div class="errorMessage" *ngIf="!isValid">{{dynamicField.label}} is required</div>
+</div>

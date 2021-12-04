@@ -18,6 +18,11 @@ const routes: Routes = [
     component: MainLayoutComponent,
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'dynamicexample',
+    component: MainLayoutComponent,
+    loadChildren: () => import('./pages/dynamic-example/dynamic-example.module').then((m) => m.DynamicExampleModule),
+  },
 ];
 
 @NgModule({

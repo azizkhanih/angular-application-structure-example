@@ -9,6 +9,7 @@
         "EDIT": "Edit",
         "DELETE": "Delete",
         "SAVE": "Save",
+        "SUBMIT": "Submit",
         "VIEW": "View",
         "CANCEL": "Cancel",
         "UPDATE": "Update",
@@ -50,7 +51,11 @@
         "SIGN_IN": "Sign in"
     },
     "HOME": {
+        "HOME": "Home",
         "ROUTE_WITH_GUARD": "Route With Guard",
         "ROUTE_WITHOUT_GUARD": "Route Without Guard"
+    },
+    "DYNAMIC_FORM": {
+        "DYNAMIC_FORM": "Dynamic Form"
     }
 }

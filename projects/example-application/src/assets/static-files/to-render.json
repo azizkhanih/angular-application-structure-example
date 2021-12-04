@@ -1,0 +1,33 @@
+[
+    {
+        "field": "name",
+        "label": "Name",
+        "type": "text",
+        "hidden": "false",
+        "mandatory": true,
+        "order": 1
+    },
+    {
+        "field": "email",
+        "label": "Email",
+        "type": "text",
+        "hidden": "false",
+        "mandatory": true,
+        "order": 2
+    },
+    {
+        "field": "confirm",
+        "label": "Checkbox with confirmation",
+        "type": "check",
+        "hidden": "false",
+        "order": 3
+    },
+    {
+        "field": "hiddenField",
+        "label": "",
+        "type": "text",
+        "hidden": "true",
+        "mandatory": false,
+        "order": 4
+    }
+]

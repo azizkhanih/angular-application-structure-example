@@ -15,7 +15,7 @@ export class AccountService
   private destroy$ = new Subject();
 
   private accountSubject: BehaviorSubject<Account> = new BehaviorSubject<Account>({} as Account);
-  public account: Observable<Account> = this.accountSubject.asObservable();
+  public account$: Observable<Account> = this.accountSubject.asObservable();
 
   constructor(
     private router: Router,

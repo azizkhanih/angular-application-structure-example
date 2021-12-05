@@ -13,7 +13,10 @@
         "type": "text",
         "hidden": "false",
         "mandatory": true,
-        "order": 2
+        "order": 2,
+        "validators": [
+            "email"
+        ]
     },
     {
         "field": "confirm",

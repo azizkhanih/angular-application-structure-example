@@ -1,20 +1,31 @@
-<div [formGroup]="form" [hidden]="dynamicField.hidden === 'true'">
+<div [formGroup]="form" [hidden]="dynamicField.hidden">
     <div class="form-group mt-3">
         <label [attr.for]="dynamicField.field">{{dynamicField.label}}</label>
 
         <ng-container [ngSwitch]="dynamicField.controlType">
 
-            <input *ngSwitchCase="dynamicFieldType.InputText" type="text" class="form-control" [id]="dynamicField.field"
+            <input *ngSwitchCase="dynamicFieldType.InputText" type="text" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
                 [formControlName]="dynamicField.field" [value]="dynamicField.value">
 
             <input *ngSwitchCase="dynamicFieldType.InputCheckBox" type="checkbox" class="form-check"
-                [id]="dynamicField.field" [formControlName]="dynamicField.field" [value]="dynamicField.value">
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
+                [formControlName]="dynamicField.field" [value]="dynamicField.value">
 
-            <select *ngSwitchCase="dynamicFieldType.Select" class="form-control" [id]="dynamicField.field"
+            <select *ngSwitchCase="dynamicFieldType.Dropdown" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
                 [formControlName]="dynamicField.field">
                 <option *ngFor="let opt of dynamicField.options" [value]="opt.field">{{opt.value}}</option>
             </select>
         </ng-container>
+
+        <div *ngIf="submitted && fieldErrors" class="invalid-feedback">
+            <div *ngIf="fieldErrors && fieldErrors['required']">
+                {{ 'VALIDATION.FIELD_IS_REQUIRED' | translate }}
+            </div>
+            <div *ngIf="fieldErrors && fieldErrors['email']">
+                {{ 'VALIDATION.EMAIL_FORMAT_IS_INVALID' | translate }}
+            </div>
+        </div>
     </div>
-    <div class="errorMessage" *ngIf="!isValid">{{dynamicField.label}} is required</div>
 </div>

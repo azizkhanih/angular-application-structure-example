@@ -1,0 +1,6 @@
+@import 'variables';
+
+.dynamic-form-example-container {
+    max-height: calc(100vh - #{$header-height} - 100px);
+    overflow-y: auto;
+}

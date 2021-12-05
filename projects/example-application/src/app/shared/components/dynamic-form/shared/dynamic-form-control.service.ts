@@ -1,21 +1,40 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicField } from './dynamic-field.model';
+import { DynamicFieldType } from './dynamic-field.type.enum';
 
 @Injectable()
 export class DynamicFieldBuilderControlService
 {
+    dynamicFieldType = DynamicFieldType;
+
     constructor() { }
 
-    toFormGroup(dynamicFields: DynamicField<string>[])
+    toFormGroup(dynamicFields: DynamicField<string>[]): FormGroup
     {
         const group: any = {};
 
         dynamicFields.forEach(dynamicField =>
         {
-            group[dynamicField.field] = dynamicField.mandatory === true ?
-                new FormControl(dynamicField.value || '', Validators.required)
-                : new FormControl(dynamicField.value || '');
+            const fieldValue = dynamicField.controlType === this.dynamicFieldType.InputCheckBox ?
+                dynamicField.value :
+                (dynamicField.value || null);
+
+            let field = dynamicField.mandatory === true ?
+                new FormControl(fieldValue, Validators.required)
+                : new FormControl(fieldValue);
+
+            dynamicField.validators.forEach((validator) =>
+            {
+                switch (validator)
+                {
+                    case Validators.email:
+                        field.addValidators(Validators.email);
+                        break;
+                }
+            });
+
+            group[dynamicField.field] = field;
         });
         return new FormGroup(group);
     }

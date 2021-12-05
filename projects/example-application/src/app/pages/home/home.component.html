@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center align-items-center pt-5">
+    <div class="col-12 col-lg-6">
+
+        <p class="text-xl fw-bold">Dynamic Form Demo</p>
+
+        <ul>
+            <li class="pt-2">
+                <p class="text-lg text-break">To review the dynamic form result you have to select
+                    <span class="fw-bold">Dynamic Form</span>
+                    link from the top navigation menu.
+                </p>
+                (This demo will support <span class="fw-600">Email</span> format validation too.)
+            </li>
+            <li class="pt-4">
+                <p class="text-lg text-break">
+                    You redirect to
+                    <span class="fw-600">DynamicExampleComponent </span>
+                    that is responsible for getting data from JSON file and passing
+                    <span class="fw-600">DynamicFields </span>
+                    list as a parameter to
+                    <span class="fw-600">DynamicFormBuilderComponent </span>.
+                </p>
+            </li>
+            <li class="pt-2">
+                <p class="text-lg">
+                    <span class="fw-600">DynamicExampleService </span>
+                    is created for mapping JSON object to different types like
+                    <span class="fw-600">InputText </span>
+                    or
+                    <span class="fw-600">InputCheckbox </span>
+                    that are extended form
+                    <span class="fw-600">DynamicField </span>
+                    base class.
+                </p>
+            </li>
+            <li class="pt-2">
+                <p class="text-lg text-break">
+                    All created components and classes and models for creating dynamic form are located at
+                    <span class="fw-600">shared\components\dynamic-form</span>:
+                </p>
+                <ul>
+                    <li>dynamic-form.module</li>
+                    <li>dynamic-form-builder</li>
+                    <li>dynamic-field-builder</li>
+                    <li>field-type</li>
+                    <li>dynamic-field.model</li>
+                    <li>dynamic-field.type.enum</li>
+                    <li>dynamic-form-control.service</li>
+                </ul>
+            </li>
+            <li class="pt-3">
+                <p class="text-lg">
+                    <span class="fw-600">DynamicFieldBuilderControlService </span>
+                    is responsible for creating FormGroup from DynamicField object.
+                </p>
+            </li>
+            <li class="pt-2">
+                <p class="text-lg">
+                    <span class="fw-600">DynamicFormBuilderComponent </span>
+                    is responsible for creating dynamic from.
+                </p>
+            </li>
+            <li class="pt-2">
+                <p class="text-lg">
+                    <span class="fw-600">DynamicFieldBuilderComponent </span>
+                    is responsible for creating form-group and set dynamic validations and errors.
+                </p>
+            </li>
+        </ul>
+
+    </div>
+</div>

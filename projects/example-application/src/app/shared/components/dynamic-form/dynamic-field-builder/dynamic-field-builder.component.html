@@ -1,21 +1,21 @@
 <div [formGroup]="form" [hidden]="dynamicField.hidden">
     <div class="form-group mt-3">
-        <label [attr.for]="dynamicField.field">{{dynamicField.label}}</label>
+        <label [attr.for]="dynamicField.key">{{ dynamicField.label | translate }}</label>
 
         <ng-container [ngSwitch]="dynamicField.controlType">
 
             <input *ngSwitchCase="dynamicFieldType.InputText" type="text" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
-                [formControlName]="dynamicField.field" [value]="dynamicField.value">
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.key"
+                [formControlName]="dynamicField.key" [value]="dynamicField.value">
 
             <input *ngSwitchCase="dynamicFieldType.InputCheckBox" type="checkbox" class="form-check"
-                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
-                [formControlName]="dynamicField.field" [value]="dynamicField.value">
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.key"
+                [formControlName]="dynamicField.key" [value]="dynamicField.value">
 
             <select *ngSwitchCase="dynamicFieldType.Dropdown" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.field"
-                [formControlName]="dynamicField.field">
-                <option *ngFor="let opt of dynamicField.options" [value]="opt.field">{{opt.value}}</option>
+                [ngClass]="{ 'is-invalid': submitted && fieldErrors }" [id]="dynamicField.key"
+                [formControlName]="dynamicField.key">
+                <option *ngFor="let opt of dynamicField.options" [value]="opt.key">{{opt.value}}</option>
             </select>
         </ng-container>
 

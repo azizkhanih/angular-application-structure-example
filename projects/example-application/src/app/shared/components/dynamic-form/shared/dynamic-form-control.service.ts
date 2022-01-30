@@ -10,7 +10,7 @@ export class DynamicFieldBuilderControlService
 
     constructor() { }
 
-    toFormGroup(dynamicFields: DynamicField<string>[]): FormGroup
+    toFormGroup(dynamicFields: DynamicField<any>[]): FormGroup
     {
         const group: any = {};
 
@@ -20,7 +20,7 @@ export class DynamicFieldBuilderControlService
                 dynamicField.value :
                 (dynamicField.value || null);
 
-            let field = dynamicField.mandatory === true ?
+            let field = dynamicField.required === true ?
                 new FormControl(fieldValue, Validators.required)
                 : new FormControl(fieldValue);
 
@@ -34,7 +34,7 @@ export class DynamicFieldBuilderControlService
                 }
             });
 
-            group[dynamicField.field] = field;
+            group[dynamicField.key] = field;
         });
         return new FormGroup(group);
     }

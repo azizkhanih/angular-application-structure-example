@@ -19,7 +19,7 @@ export class DynamicFieldBuilderComponent
 
   get fieldErrors(): ValidationErrors | null
   {
-    return this.form.controls[this.dynamicField.field].errors;
+    return this.form.controls[this.dynamicField.key].errors;
   }
 
   constructor() { }

@@ -1,8 +1,8 @@
-# Angular sign-up example workspace
+# Angular workspace example
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
 
 ## Demo 
-See [Demo](http://kizhangallery.ir) page.
+See [Demo](http://hazizkhani.ir) page.
 
 
 ## Project Structure 
@@ -37,7 +37,7 @@ Run `ng build` or `npm run build` to build the project. The build artifacts will
 Run `ng test` or `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 
-## Getting started sign-up form test
+## Getting started
 Serve or open [Demo](http://kizhangallery.ir) page.
 
 

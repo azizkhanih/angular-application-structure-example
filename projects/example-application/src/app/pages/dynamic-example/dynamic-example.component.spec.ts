@@ -30,10 +30,10 @@ const VENDORS_MODULES = [TranslateModule.forChild({ extend: true })];
 const stubData = [
   {
     controlType: 0,
-    field: "name",
+    key: "name",
     hidden: false,
     label: "Name",
-    mandatory: true,
+    required: true,
     options: [],
     order: 1,
     type: "text",
@@ -42,10 +42,10 @@ const stubData = [
   },
   {
     controlType: 1,
-    field: "confirm",
+    key: "confirm",
     hidden: false,
     label: "Checkbox with confirmation",
-    mandatory: false,
+    required: false,
     options: [],
     order: 3,
     type: "check",
@@ -95,7 +95,7 @@ describe('DynamicExampleComponent', () =>
       .compileComponents();
   });
 
-  beforeEach(async () =>
+  beforeEach(() =>
   {
     fixture = TestBed.createComponent(DynamicExampleComponent);
     component = fixture.componentInstance;

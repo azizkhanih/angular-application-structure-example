@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { UnsubscribeOnDestroy } from '../../core/UnsubscribeOnDestroy';
+import { UnsubscribeOnDestroy } from '../../core/unsubscribe-on-destroy';
 import { EmailValidator } from '../../shared/validators/email.validator';
 import { MustMatchValidator } from '../../shared/validators/must-match.validator';
 import { NotContainFirstNameOrLastNameValidator } from '../shared/validators/not-containt-firstname-or-lastname.validator';
@@ -26,7 +27,10 @@ export class SignUpComponent extends UnsubscribeOnDestroy implements OnInit, OnD
     email: new FormControl(''),
     password: new FormControl('')
   });
-  isLoading = false;
+
+  private isLoadingSubject: Subject<boolean> = new Subject<boolean>();
+  public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
+
   submitted = false;
   returnUrl: string = '';
 
@@ -34,13 +38,14 @@ export class SignUpComponent extends UnsubscribeOnDestroy implements OnInit, OnD
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef,
     private accountService: AccountService,
     private translateService: TranslateService,
     private snackBarService: SnackBarService
   )
   {
     super();
+
+    this.setIsLoading(false);
   }
 
   ngOnInit()
@@ -78,8 +83,7 @@ export class SignUpComponent extends UnsubscribeOnDestroy implements OnInit, OnD
       return;
     }
 
-    this.isLoading = true;
-    this.changeDetectorRef.detectChanges();
+    this.setIsLoading(true);
 
     const signUpRequest = new SignUpRequest(
       this.form['firstName'].value,
@@ -97,16 +101,19 @@ export class SignUpComponent extends UnsubscribeOnDestroy implements OnInit, OnD
         {
           this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SIGN_UP_OPERATION_WAS_SUCCESSFUL"));
 
-          this.isLoading = false;
-          this.changeDetectorRef.detectChanges();
+          this.setIsLoading(false);
 
           this.router.navigate(['/account/signin']);
         },
         error: () =>
         {
-          this.isLoading = false;
-          this.changeDetectorRef.detectChanges();
+          this.setIsLoading(false);
         }
       });
+  }
+
+  setIsLoading(value: boolean)
+  {
+    this.isLoadingSubject.next(value);
   }
 }

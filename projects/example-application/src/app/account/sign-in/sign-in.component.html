@@ -38,7 +38,7 @@
           </div>
 
           <div class="mt-3 d-flex justify-content-between">
-            <button type="submit" [disabled]="isLoading" mat-flat-button color="primary">
+            <button type="submit" mat-flat-button color="primary">
               {{ 'ACCOUNT.SIGN_IN' | translate }}
             </button>
 
@@ -50,7 +50,7 @@
 
         </form>
 
-        <tools-loading [show]="isLoading"></tools-loading>
+        <tools-loading [show]="(isLoading$ | async) === true"></tools-loading>
 
       </div>
     </div>

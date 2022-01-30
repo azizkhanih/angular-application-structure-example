@@ -3,34 +3,34 @@ import { DynamicFieldType } from "./dynamic-field.type.enum";
 
 export class DynamicField<T> {
     value: T | undefined;
-    field: string;
+    key: string;
     label: string;
-    mandatory: boolean;
+    required: boolean;
     hidden: boolean;
     order: number;
     controlType: DynamicFieldType;
     type: string;
-    options: { field: string, value: string; }[];
+    options: { key: string, value: string; }[];
     validators: Validators[];
 
     constructor(
         options: {
             value?: T;
-            field?: string;
+            key?: string;
             label?: string;
-            mandatory?: boolean;
+            required?: boolean;
             hidden?: string;
             order?: number;
             controlType?: DynamicFieldType;
             type?: string;
-            options?: { field: string, value: string; }[];
+            options?: { key: string, value: string; }[];
             validators?: string[];
         } = {})
     {
         this.value = options.value;
-        this.field = options.field || '';
+        this.key = options.key || '';
         this.label = options.label || '';
-        this.mandatory = !!options.mandatory;
+        this.required = !!options.required;
         this.hidden = options.hidden === 'true';
         this.order = options.order === undefined ? 1 : options.order;
         this.controlType = options.controlType || DynamicFieldType.InputText;

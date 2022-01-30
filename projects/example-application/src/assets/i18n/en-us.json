@@ -56,6 +56,10 @@
         "ROUTE_WITHOUT_GUARD": "Route Without Guard"
     },
     "DYNAMIC_FORM": {
-        "DYNAMIC_FORM": "Dynamic Form"
+        "DYNAMIC_FORM": "Dynamic Form",
+        "FORM_RESULT": "Form Result",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "CONFIRMATION": "Confirmation"
     }
 }

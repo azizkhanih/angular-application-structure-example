@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { DynamicExampleService } from 'projects/example-application/src/app/pages/dynamic-example/dynamic-example.service';
+import { LoadingModule, SnackBarModule } from 'projects/tools/src/public-api';
 import { Observable } from 'rxjs';
 import { DynamicField } from '../shared/dynamic-field.model';
 import { DynamicFieldBuilderControlService } from '../shared/dynamic-form-control.service';
@@ -18,14 +19,15 @@ const BASE_MODULES = [
 ];
 const MATERIAL_MODULES = [MatIconModule, MatButtonModule];
 const VENDORS_MODULES = [TranslateModule.forChild({ extend: true })];
+const TOOLS_MODULES = [SnackBarModule, LoadingModule];
 
 const dynamicFieldStubData = [
   {
     controlType: 0,
-    field: "name",
+    key: "name",
     hidden: false,
     label: "Name",
-    mandatory: true,
+    required: true,
     options: [],
     order: 1,
     type: "text",
@@ -34,10 +36,10 @@ const dynamicFieldStubData = [
   },
   {
     controlType: 1,
-    field: "confirm",
+    key: "confirm",
     hidden: false,
     label: "Checkbox with confirmation",
-    mandatory: false,
+    required: false,
     options: [],
     order: 3,
     type: "check",
@@ -76,7 +78,8 @@ describe('DynamicFormBuilderComponent', () =>
       imports: [
         ...BASE_MODULES,
         ...MATERIAL_MODULES,
-        ...VENDORS_MODULES
+        ...VENDORS_MODULES,
+        ...TOOLS_MODULES
       ],
       providers: [
         TranslateStore,

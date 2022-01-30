@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from 'projects/tools/src/public-api';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { UnsubscribeOnDestroy } from '../../core/UnsubscribeOnDestroy';
+import { UnsubscribeOnDestroy } from '../../core/unsubscribe-on-destroy';
 import { EmailValidator } from '../../shared/validators/email.validator';
 import { Account } from '../shared/models';
 import { AccountService } from '../shared/services';
@@ -22,7 +23,10 @@ export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnD
     email: new FormControl(''),
     password: new FormControl('')
   });
-  isLoading = false;
+
+  private isLoadingSubject: Subject<boolean> = new Subject<boolean>();
+  public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
+
   submitted = false;
   returnUrl: string = '';
 
@@ -30,13 +34,14 @@ export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnD
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef,
     private accountService: AccountService,
     private translateService: TranslateService,
     private snackBarService: SnackBarService
   )
   {
     super();
+
+    this.setIsLoading(false);
 
     // redirect to main route if already logged in
     if (this.accountService.accountValue?.accessToken)
@@ -72,8 +77,7 @@ export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnD
       return;
     }
 
-    this.isLoading = true;
-    this.changeDetectorRef.detectChanges();
+    this.setIsLoading(true);
 
     const signInRequest = new SignInRequest(
       this.form['email'].value,
@@ -84,8 +88,8 @@ export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnD
     setTimeout(() =>
     {
       this.snackBarService.showSuccess(this.translateService.instant("MESSAGE.THE_SERVICE_NOT_IMPLEMENTED"));
-      this.isLoading = false;
-      this.changeDetectorRef.detectChanges();
+
+      this.setIsLoading(false);
     }, 2000);
     return;
 
@@ -111,9 +115,13 @@ export class SignInComponent extends UnsubscribeOnDestroy implements OnInit, OnD
         },
         error: () =>
         {
-          this.isLoading = false;
-          this.changeDetectorRef.detectChanges();
+          this.setIsLoading(false);
         }
       });
+  }
+
+  setIsLoading(value: boolean)
+  {
+    this.isLoadingSubject.next(value);
   }
 }

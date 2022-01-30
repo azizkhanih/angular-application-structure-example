@@ -1,36 +1,36 @@
 [
     {
-        "field": "name",
-        "label": "Name",
+        "key": "name",
+        "label": "DYNAMIC_FORM.NAME",
         "type": "text",
         "hidden": "false",
-        "mandatory": true,
+        "required": true,
         "order": 1
     },
     {
-        "field": "email",
-        "label": "Email",
+        "key": "email",
+        "label": "DYNAMIC_FORM.EMAIL",
         "type": "text",
         "hidden": "false",
-        "mandatory": true,
+        "required": true,
         "order": 2,
         "validators": [
             "email"
         ]
     },
     {
-        "field": "confirm",
-        "label": "Checkbox with confirmation",
+        "key": "confirm",
+        "label": "DYNAMIC_FORM.CONFIRMATION",
         "type": "check",
         "hidden": "false",
         "order": 3
     },
     {
-        "field": "hiddenField",
+        "key": "hiddenkey",
         "label": "",
         "type": "text",
         "hidden": "true",
-        "mandatory": false,
+        "required": false,
         "order": 4
     }
 ]

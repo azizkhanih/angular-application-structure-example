@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateStore } from '@ngx-translate/core';
+import { LoadingModule, SnackBarModule } from 'projects/tools/src/public-api';
 import { Observable } from 'rxjs';
 import { DynamicField } from '../shared/dynamic-field.model';
 import { DynamicFieldBuilderControlService } from '../shared/dynamic-form-control.service';
@@ -13,15 +14,16 @@ const BASE_MODULES = [
   ReactiveFormsModule
 ];
 const VENDORS_MODULES = [TranslateModule.forChild({ extend: true })];
+const TOOLS_MODULES = [SnackBarModule, LoadingModule];
 
 const dynamicFieldInputNameStubData = new InputText(
   {
     value: '',
-    field: "name",
+    key: "name",
     label: "Name",
     type: "text",
     hidden: "false",
-    mandatory: true,
+    required: true,
     order: 1
   });
 
@@ -36,7 +38,8 @@ describe('DynamicFieldBuilderComponent', () =>
       declarations: [DynamicFieldBuilderComponent],
       imports: [
         ...BASE_MODULES,
-        ...VENDORS_MODULES
+        ...VENDORS_MODULES,
+        ...TOOLS_MODULES
       ],
       providers: [
         TranslateStore,

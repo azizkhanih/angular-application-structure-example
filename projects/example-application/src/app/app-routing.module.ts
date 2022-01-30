@@ -19,10 +19,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'dynamicexample',
+    path: 'dynamicform',
     component: MainLayoutComponent,
-    loadChildren: () => import('./pages/dynamic-example/dynamic-example.module').then((m) => m.DynamicExampleModule),
+    loadChildren: () => import('./pages/dynamic-form-example/dynamic-form-example.module').then((m) => m.DynamicFormExampleModule),
   },
+  {
+    path: 'tasksroadmap',
+    component: MainLayoutComponent,
+    loadChildren: () => import('./pages/tasks-roadmap-example/tasks-roadmap-example.module').then((m) => m.TasksRoadmapExampleModule),
+  }
 ];
 
 @NgModule({

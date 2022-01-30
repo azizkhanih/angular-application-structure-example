@@ -12,8 +12,8 @@ import { TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { DynamicField } from '../../shared/components/dynamic-form/shared/dynamic-field.model';
 import { SharedModule } from '../../shared/shared.module';
-import { DynamicExampleComponent } from './dynamic-example.component';
-import { DynamicExampleService } from './dynamic-example.service';
+import { DynamicFormExampleComponent } from './dynamic-form-example.component';
+import { DynamicFormExampleService } from './dynamic-form-example.service';
 
 const BASE_MODULES = [
   CommonModule,
@@ -54,7 +54,7 @@ const stubData = [
   }
 ];
 
-class DynamicExampleServiceMock extends DynamicExampleService
+class DynamicFormExampleServiceMock extends DynamicFormExampleService
 {
   override getDynamicFields(): Observable<DynamicField<any>[]>
   {
@@ -67,20 +67,20 @@ class DynamicExampleServiceMock extends DynamicExampleService
   }
 }
 
-describe('DynamicExampleComponent', () =>
+describe('DynamicFormExampleComponent', () =>
 {
-  let component: DynamicExampleComponent;
-  let fixture: ComponentFixture<DynamicExampleComponent>;
+  let component: DynamicFormExampleComponent;
+  let fixture: ComponentFixture<DynamicFormExampleComponent>;
 
   let de: DebugElement;
   let el: HTMLElement;
 
-  let newDynamicExampleServiceMock = new DynamicExampleServiceMock();
+  let newDynamicFormExampleServiceMock = new DynamicFormExampleServiceMock();
 
   beforeEach(async () =>
   {
     await TestBed.configureTestingModule({
-      declarations: [DynamicExampleComponent],
+      declarations: [DynamicFormExampleComponent],
       imports: [
         ...BASE_MODULES,
         ...APP_MODULES,
@@ -88,19 +88,19 @@ describe('DynamicExampleComponent', () =>
       ],
       providers: [
         TranslateStore,
-        { provide: DynamicExampleService }
+        { provide: DynamicFormExampleService }
       ]
     })
-      .overrideProvider(DynamicExampleService, { useValue: newDynamicExampleServiceMock })
+      .overrideProvider(DynamicFormExampleService, { useValue: newDynamicFormExampleServiceMock })
       .compileComponents();
   });
 
   beforeEach(() =>
   {
-    fixture = TestBed.createComponent(DynamicExampleComponent);
+    fixture = TestBed.createComponent(DynamicFormExampleComponent);
     component = fixture.componentInstance;
 
-    component.dynamicFields$ = newDynamicExampleServiceMock.getDynamicFields();
+    component.dynamicFields$ = newDynamicFormExampleServiceMock.getDynamicFields();
     component.ngOnInit();
 
     fixture.detectChanges();

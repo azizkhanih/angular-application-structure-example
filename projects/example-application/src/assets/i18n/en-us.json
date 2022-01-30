@@ -48,7 +48,9 @@
         "CONFIRM_PASSWORD": "Confirm Password"
     },
     "HEADER": {
-        "SIGN_IN": "Sign in"
+        "SIGN_IN": "Sign in",
+        "DYNAMIC_FORM": "Dynamic Form",
+        "TASKS_ROADMAP": "Tasks Roadmap"
     },
     "HOME": {
         "HOME": "Home",

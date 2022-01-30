@@ -6,7 +6,7 @@ import { InputCheckbox } from '../../shared/components/dynamic-form/shared/field
 import { InputText } from '../../shared/components/dynamic-form/shared/field-type/input-text';
 
 @Injectable()
-export class DynamicExampleService
+export class TasksRoadmapExampleService
 {
   getDynamicFields(): Observable<DynamicField<any>[]>
   {

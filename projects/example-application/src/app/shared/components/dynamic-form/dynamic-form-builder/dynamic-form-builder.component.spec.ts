@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateStore } from '@ngx-translate/core';
-import { DynamicExampleService } from 'projects/example-application/src/app/pages/dynamic-example/dynamic-example.service';
+import { DynamicFormExampleService } from 'projects/example-application/src/app/pages/dynamic-form-example/dynamic-form-example.service';
 import { LoadingModule, SnackBarModule } from 'projects/tools/src/public-api';
 import { Observable } from 'rxjs';
 import { DynamicField } from '../shared/dynamic-field.model';
@@ -48,7 +48,7 @@ const dynamicFieldStubData = [
   }
 ];
 
-class DynamicExampleServiceMock extends DynamicExampleService
+class DynamicFormExampleServiceMock extends DynamicFormExampleService
 {
   override getDynamicFields(): Observable<DynamicField<any>[]>
   {
@@ -69,7 +69,7 @@ describe('DynamicFormBuilderComponent', () =>
   let de: DebugElement;
   let el: HTMLElement;
 
-  let newDynamicExampleServiceMock = new DynamicExampleServiceMock();
+  let newDynamicFormExampleServiceMock = new DynamicFormExampleServiceMock();
 
   beforeEach(async () =>
   {
@@ -83,11 +83,11 @@ describe('DynamicFormBuilderComponent', () =>
       ],
       providers: [
         TranslateStore,
-        { provide: DynamicExampleService },
+        { provide: DynamicFormExampleService },
         { provide: DynamicFieldBuilderControlService, useClass: DynamicFieldBuilderControlServiceMock }
       ]
     })
-      .overrideProvider(DynamicExampleService, { useValue: newDynamicExampleServiceMock })
+      .overrideProvider(DynamicFormExampleService, { useValue: newDynamicFormExampleServiceMock })
       .compileComponents();
   });
 
@@ -102,7 +102,7 @@ describe('DynamicFormBuilderComponent', () =>
 
   it('retrieves the dynamic field list', async () =>
   {
-    newDynamicExampleServiceMock.getDynamicFields().subscribe(result =>
+    newDynamicFormExampleServiceMock.getDynamicFields().subscribe(result =>
     {
       expect(result.length).toBeGreaterThan(0);
     });

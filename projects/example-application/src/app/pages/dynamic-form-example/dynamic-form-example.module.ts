@@ -2,15 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { DynamicExampleComponent } from './dynamic-example.component';
-import { DynamicExampleService } from './dynamic-example.service';
+import { DynamicFormExampleComponent } from './dynamic-form-example.component';
+import { DynamicFormExampleService } from './dynamic-form-example.service';
 
 const BASE_MODULES = [CommonModule, RouterModule];
 const APP_MODULES = [SharedModule];
-const COMPONENTS = [DynamicExampleComponent];
+const COMPONENTS = [DynamicFormExampleComponent];
 
 const routes: Routes = [
-    { path: '', component: DynamicExampleComponent }
+    { path: '', component: DynamicFormExampleComponent }
 ];
 
 @NgModule({
@@ -21,7 +21,7 @@ const routes: Routes = [
         ...APP_MODULES
     ],
     providers: [
-        DynamicExampleService
+        DynamicFormExampleService
     ]
 })
-export class DynamicExampleModule { }
+export class DynamicFormExampleModule { }

@@ -2,7 +2,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
 
 ## Demo 
-See [Demo](http://hazizkhani.ir) page.
+See [Demo](http://runsensible.ir) page.
 
 
 ## Project Structure 
@@ -38,6 +38,6 @@ Run `ng test` or `npm run test` to execute the unit tests via [Karma](https://ka
 
 
 ## Getting started
-Serve or open [Demo](http://kizhangallery.ir) page.
+Serve or open [Demo](http://runsensible.ir) page.
 
 
